@@ -1,0 +1,53 @@
+﻿@using ExamProject5.Models
+
+@model List<TeamMember>
+@{
+    ViewData["Title"] = "Index";
+    int count = 1;
+}
+
+<div class="col-sm-12 col-xl-6">
+    <div class="d-flex justify-content-end mb-2">
+        <a class="btn btn-success text-light" asp-area="Admin" asp-controller="TeamMember" asp-action="Create">
+            Create Post<i class="bi bi-pencil-square"></i>
+        </a>
+    </div>
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Hoverable Table</h6>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Profession</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Photo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (TeamMember member in Model)
+                {
+                    <tr>
+                        <th>@count</th>
+                        <td>@member.Name</td>
+                        <td>@member.Surname</td>
+                        <td>@member.Profession</td>
+                        <td>@member.Description</td>
+                        <td><img src="~/assets/img/team/@member.ImagePath" height="150" /></td>
+                        <td>
+                            <a class="btn btn-warning text-light" asp-area="Admin" asp-controller="TeamMember" asp-action="Update" asp-route-Id="@member.Id">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                            </a>
+                            <a class="btn btn-danger text-light" asp-area="Admin" asp-controller="TeamMember" asp-action="Delete" asp-route-Id="@member.Id">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="hidden" @(count++)></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
